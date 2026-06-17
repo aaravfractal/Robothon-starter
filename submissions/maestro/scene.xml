@@ -1,0 +1,183 @@
+<mujoco model="hand_on_piano">
+  <compiler angle="radian" autolimits="true"/>
+
+  <option gravity="0 0 -9.81" timestep="0.002" integrator="implicitfast"/>
+
+  <visual>
+    <headlight diffuse="0.4 0.4 0.4" ambient="0.3 0.3 0.3"/>
+    <global azimuth="120" elevation="-20" offwidth="1280" offheight="720"/>
+  </visual>
+
+  <default>
+    <!-- finger phalanx links -->
+    <default class="phalanx">
+      <geom type="capsule" size="0.008" rgba="0.85 0.7 0.6 1"
+            friction="1.2 0.02 0.001" condim="4"/>
+      <joint type="hinge" axis="1 0 0" range="-1.7 0.3"
+             damping="0.05" stiffness="0.3" armature="0.001"/>
+    </default>
+    <!-- finger position actuators -->
+    <default class="finger_act">
+      <position kp="3" ctrlrange="-1.7 0.3"/>
+    </default>
+    <!-- piano keys -->
+    <default class="key">
+      <joint type="hinge" axis="1 0 0" pos="0 0 0"
+             range="-0.12 0.0" stiffness="40" damping="1.2" armature="0.002"/>
+      <geom type="box" friction="1.2 0.02 0.001" condim="4"/>
+    </default>
+  </default>
+
+  <asset>
+    <texture name="grid" type="2d" builtin="checker"
+             rgb1="0.2 0.3 0.4" rgb2="0.25 0.35 0.45"
+             width="512" height="512"/>
+    <material name="grid" texture="grid" texrepeat="8 8"
+              reflectance="0.2"/>
+    <material name="palm_mat" rgba="0.3 0.3 0.35 1"/>
+  </asset>
+
+  <worldbody>
+    <light name="sun" directional="true" diffuse="0.8 0.8 0.8"
+           pos="0 -0.5 1.5" dir="0 0.3 -1"/>
+
+    <geom name="floor" type="plane" size="3 3 0.1" material="grid"/>
+
+    <!-- Fixed demo camera: in front of the keyboard (the +y side where the
+         key fronts dip), slightly above, looking back and down (~35 deg).
+         Fingertips + keys are nearest the camera so the press action is
+         unobstructed by the palm, which sits behind. -->
+    <camera name="overview" pos="0 0.62 0.4" fovy="48"
+            xyaxes="-1 0 0 0 -0.5 0.866"/>
+
+    <!-- =============== PIANO KEYBOARD =============== -->
+    <!-- 3 keys. Each pivots about its back edge (hinge axis = x),
+         springs return it up. A touch sensor sits on each top. -->
+    <body name="keyboard" pos="0 0 0">
+      <!-- key C (left) - red -->
+      <body name="key_C" pos="-0.07 0 0.02">
+        <joint name="key_C_joint" class="key"/>
+        <geom name="key_C_geom" class="key" pos="0 0.1 0"
+              size="0.03 0.1 0.008" rgba="0.85 0.2 0.2 1"/>
+        <site name="key_C_touch" type="box" pos="0 0.1 0.012"
+              size="0.03 0.1 0.005" rgba="0 0 0 0"/>
+      </body>
+      <!-- key D (center) - green -->
+      <body name="key_D" pos="0 0 0.02">
+        <joint name="key_D_joint" class="key"/>
+        <geom name="key_D_geom" class="key" pos="0 0.1 0"
+              size="0.03 0.1 0.008" rgba="0.2 0.75 0.3 1"/>
+        <site name="key_D_touch" type="box" pos="0 0.1 0.012"
+              size="0.03 0.1 0.005" rgba="0 0 0 0"/>
+      </body>
+      <!-- key E (right) - blue -->
+      <body name="key_E" pos="0.07 0 0.02">
+        <joint name="key_E_joint" class="key"/>
+        <geom name="key_E_geom" class="key" pos="0 0.1 0"
+              size="0.03 0.1 0.008" rgba="0.2 0.4 0.9 1"/>
+        <site name="key_E_touch" type="box" pos="0 0.1 0.012"
+              size="0.03 0.1 0.005" rgba="0 0 0 0"/>
+      </body>
+    </body>
+
+    <!-- =============== DEXTEROUS HAND =============== -->
+    <!-- Palm is a static body (no joint) => welded to world,
+         positioned above & behind the keys, palm facing down.
+         4 fingers extend forward (+y) over the keys; each finger
+         has 3 hinge (flexion) joints => 12 DOF total. -->
+    <body name="palm" pos="0 -0.06 0.18">
+      <geom name="palm_geom" type="box" size="0.12 0.04 0.012"
+            material="palm_mat"/>
+
+      <!-- finger 1 (over key C) -->
+      <body name="f1_prox" pos="-0.07 0.04 0">
+        <joint name="f1_j1" class="phalanx"/>
+        <geom class="phalanx" fromto="0 0 0 0 0.06 0"/>
+        <body name="f1_mid" pos="0 0.06 0">
+          <joint name="f1_j2" class="phalanx"/>
+          <geom class="phalanx" fromto="0 0 0 0 0.06 0"/>
+          <body name="f1_dist" pos="0 0.06 0">
+            <joint name="f1_j3" class="phalanx"/>
+            <geom class="phalanx" fromto="0 0 0 0 0.055 0"/>
+            <site name="f1_tip" pos="0 0.055 0" size="0.009"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- finger 2 (over key D) -->
+      <body name="f2_prox" pos="0 0.04 0">
+        <joint name="f2_j1" class="phalanx"/>
+        <geom class="phalanx" fromto="0 0 0 0 0.06 0"/>
+        <body name="f2_mid" pos="0 0.06 0">
+          <joint name="f2_j2" class="phalanx"/>
+          <geom class="phalanx" fromto="0 0 0 0 0.06 0"/>
+          <body name="f2_dist" pos="0 0.06 0">
+            <joint name="f2_j3" class="phalanx"/>
+            <geom class="phalanx" fromto="0 0 0 0 0.055 0"/>
+            <site name="f2_tip" pos="0 0.055 0" size="0.009"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- finger 3 (over key E) -->
+      <body name="f3_prox" pos="0.07 0.04 0">
+        <joint name="f3_j1" class="phalanx"/>
+        <geom class="phalanx" fromto="0 0 0 0 0.06 0"/>
+        <body name="f3_mid" pos="0 0.06 0">
+          <joint name="f3_j2" class="phalanx"/>
+          <geom class="phalanx" fromto="0 0 0 0 0.06 0"/>
+          <body name="f3_dist" pos="0 0.06 0">
+            <joint name="f3_j3" class="phalanx"/>
+            <geom class="phalanx" fromto="0 0 0 0 0.055 0"/>
+            <site name="f3_tip" pos="0 0.055 0" size="0.009"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- finger 4 (pinky, offset to the right) -->
+      <body name="f4_prox" pos="0.135 0.04 0">
+        <joint name="f4_j1" class="phalanx"/>
+        <geom class="phalanx" fromto="0 0 0 0 0.05 0"/>
+        <body name="f4_mid" pos="0 0.05 0">
+          <joint name="f4_j2" class="phalanx"/>
+          <geom class="phalanx" fromto="0 0 0 0 0.05 0"/>
+          <body name="f4_dist" pos="0 0.05 0">
+            <joint name="f4_j3" class="phalanx"/>
+            <geom class="phalanx" fromto="0 0 0 0 0.045 0"/>
+            <site name="f4_tip" pos="0 0.045 0" size="0.009"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <!-- Direct position actuators on every finger joint (12 DOF).
+       (Spatial tendons were the preferred option, but per-joint
+       position actuators give clean independent manual control for
+       testing, which the MJCF spec explicitly allows as the
+       fallback when tendon routing is complex.) -->
+  <actuator>
+    <position name="f1_j1_act" joint="f1_j1" class="finger_act"/>
+    <position name="f1_j2_act" joint="f1_j2" class="finger_act"/>
+    <position name="f1_j3_act" joint="f1_j3" class="finger_act"/>
+
+    <position name="f2_j1_act" joint="f2_j1" class="finger_act"/>
+    <position name="f2_j2_act" joint="f2_j2" class="finger_act"/>
+    <position name="f2_j3_act" joint="f2_j3" class="finger_act"/>
+
+    <position name="f3_j1_act" joint="f3_j1" class="finger_act"/>
+    <position name="f3_j2_act" joint="f3_j2" class="finger_act"/>
+    <position name="f3_j3_act" joint="f3_j3" class="finger_act"/>
+
+    <position name="f4_j1_act" joint="f4_j1" class="finger_act"/>
+    <position name="f4_j2_act" joint="f4_j2" class="finger_act"/>
+    <position name="f4_j3_act" joint="f4_j3" class="finger_act"/>
+  </actuator>
+
+  <!-- One touch sensor per key top surface -->
+  <sensor>
+    <touch name="key_C_sensor" site="key_C_touch"/>
+    <touch name="key_D_sensor" site="key_D_touch"/>
+    <touch name="key_E_sensor" site="key_E_touch"/>
+  </sensor>
+</mujoco>

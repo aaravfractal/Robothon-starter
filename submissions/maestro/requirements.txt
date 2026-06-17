@@ -1,0 +1,9 @@
+# Pinned to the versions this project was developed and verified against.
+# Python 3.13 (any 3.10+ should work).
+mujoco==3.9.0
+numpy==2.4.6
+Pillow==12.2.0          # needed for `--record` GIF output
+# Optional: only for `--record out.mp4` (MP4 export). imageio-ffmpeg bundles
+# a static ffmpeg binary, so no system ffmpeg install is required.
+imageio==2.37.3
+imageio-ffmpeg==0.6.0

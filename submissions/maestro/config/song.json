@@ -1,0 +1,12 @@
+{
+  "title": "Hot Cross Buns",
+  "tempo_bpm": 120,
+  "notes": [
+    { "key": "blue",  "duration": 1.0 },
+    { "key": "green", "duration": 1.0 },
+    { "key": "red",   "duration": 2.0 },
+    { "key": "blue",  "duration": 1.0 },
+    { "key": "green", "duration": 1.0 },
+    { "key": "red",   "duration": 2.0 }
+  ]
+}
