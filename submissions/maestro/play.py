@@ -2,9 +2,11 @@
 """Load scene.xml and open the interactive MuJoCo viewer.
 
 Drag the actuator sliders in the viewer's "Control" panel
-(left side, expand the Control group) to manually flex the
-fingers and press the piano keys. The keys spring back up on
-release and their touch sensors report contact force.
+(left side, expand the Control group) to manually flex the 5
+fingers, slide the whole hand sideways on its prismatic wrist
+joint (the `wrist_act` slider), and press the 7 piano keys. The
+keys spring back up on release and their touch sensors report
+contact force.
 """
 import os
 import mujoco
@@ -34,14 +36,9 @@ def main():
     print(f"\n{model.nsensor} sensors:")
     for n in sensors:
         print(f"  - {n}")
-    # Rest the unused pinky (f4) in a slightly curled, relaxed pose so it
-    # looks natural on startup. Its position actuators hold this until you
-    # drag the f4 sliders yourself.
-    for j, target in zip((1, 2, 3), (-0.35, -0.60, -0.60)):
-        aid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, f"f4_j{j}_act")
-        data.ctrl[aid] = target
 
-    print("\nOpening viewer. Use the Control panel to actuate fingers.\n")
+    print("\nOpening viewer. Use the Control panel to actuate the fingers and "
+          "the wrist slide.\n")
 
     mujoco.viewer.launch(model, data)
 

@@ -1,12 +1,59 @@
 {
-  "title": "Hot Cross Buns",
-  "tempo_bpm": 120,
+  "title": "Ode to Joy",
+  "tempo_bpm": 90,
   "notes": [
-    { "key": "blue",  "duration": 1.0 },
-    { "key": "green", "duration": 1.0 },
-    { "key": "red",   "duration": 2.0 },
-    { "key": "blue",  "duration": 1.0 },
-    { "key": "green", "duration": 1.0 },
-    { "key": "red",   "duration": 2.0 }
+    { "_section": "intro: an ascending run across all 7 keys (the wrist slides left->right, crescendo)",
+      "keys": ["C"], "duration": 0.75, "velocity": 0.40 },
+    { "keys": ["D"], "duration": 0.75, "velocity": 0.48 },
+    { "keys": ["E"], "duration": 0.75, "velocity": 0.56 },
+    { "keys": ["F"], "duration": 0.75, "velocity": 0.64 },
+    { "keys": ["G"], "duration": 0.75, "velocity": 0.72 },
+    { "keys": ["A"], "duration": 0.75, "velocity": 0.80 },
+    { "keys": ["B"], "duration": 1.00, "velocity": 0.88 },
+
+    { "_section": "Ode to Joy, first period (keys C-G)",
+      "keys": ["E"], "duration": 1.0, "velocity": 0.70 },
+    { "keys": ["E"], "duration": 1.0, "velocity": 0.66 },
+    { "keys": ["F"], "duration": 1.0, "velocity": 0.74 },
+    { "keys": ["G"], "duration": 1.0, "velocity": 0.86 },
+
+    { "keys": ["G"], "duration": 1.0, "velocity": 0.86 },
+    { "keys": ["F"], "duration": 1.0, "velocity": 0.74 },
+    { "keys": ["E"], "duration": 1.0, "velocity": 0.70 },
+    { "keys": ["D"], "duration": 1.0, "velocity": 0.64 },
+
+    { "keys": ["C"], "duration": 1.0, "velocity": 0.62 },
+    { "keys": ["C"], "duration": 1.0, "velocity": 0.62 },
+    { "keys": ["D"], "duration": 1.0, "velocity": 0.68 },
+    { "keys": ["E"], "duration": 1.0, "velocity": 0.74 },
+
+    { "keys": ["E"], "duration": 1.5, "velocity": 0.78 },
+    { "keys": ["D"], "duration": 0.5, "velocity": 0.58 },
+    { "keys": ["D"], "duration": 2.0, "velocity": 0.55 },
+
+    { "_section": "Ode to Joy, second period",
+      "keys": ["E"], "duration": 1.0, "velocity": 0.70 },
+    { "keys": ["E"], "duration": 1.0, "velocity": 0.66 },
+    { "keys": ["F"], "duration": 1.0, "velocity": 0.74 },
+    { "keys": ["G"], "duration": 1.0, "velocity": 0.86 },
+
+    { "keys": ["G"], "duration": 1.0, "velocity": 0.86 },
+    { "keys": ["F"], "duration": 1.0, "velocity": 0.74 },
+    { "keys": ["E"], "duration": 1.0, "velocity": 0.70 },
+    { "keys": ["D"], "duration": 1.0, "velocity": 0.64 },
+
+    { "keys": ["C"], "duration": 1.0, "velocity": 0.62 },
+    { "keys": ["C"], "duration": 1.0, "velocity": 0.62 },
+    { "keys": ["D"], "duration": 1.0, "velocity": 0.68 },
+    { "keys": ["E"], "duration": 1.0, "velocity": 0.74 },
+
+    { "keys": ["D"], "duration": 1.5, "velocity": 0.66 },
+    { "keys": ["C"], "duration": 0.5, "velocity": 0.56 },
+    { "keys": ["C"], "duration": 2.0, "velocity": 0.60 },
+
+    { "_section": "chordal cadence: C major -> E minor -> C major (different fingers strike together)",
+      "keys": ["C", "E", "G"], "duration": 2.0, "velocity": 0.80 },
+    { "keys": ["E", "G", "B"], "duration": 2.0, "velocity": 0.85 },
+    { "keys": ["C", "E", "G"], "duration": 3.0, "velocity": 0.95 }
   ]
 }
