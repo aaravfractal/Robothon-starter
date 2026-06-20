@@ -1,0 +1,23 @@
+{
+  "title": "Twinkle Twinkle Little Star",
+  "tempo_bpm": 100,
+  "notes": [
+    { "_section": "Twinkle twinkle little star",
+      "keys": ["C"], "duration": 1, "velocity": 0.65 },
+    { "keys": ["C"], "duration": 1, "velocity": 0.65 },
+    { "keys": ["G"], "duration": 1, "velocity": 0.78 },
+    { "keys": ["G"], "duration": 1, "velocity": 0.78 },
+    { "keys": ["A"], "duration": 1, "velocity": 0.82 },
+    { "keys": ["A"], "duration": 1, "velocity": 0.82 },
+    { "keys": ["G"], "duration": 2, "velocity": 0.74 },
+
+    { "_section": "How I wonder what you are",
+      "keys": ["F"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["F"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["E"], "duration": 1, "velocity": 0.66 },
+    { "keys": ["E"], "duration": 1, "velocity": 0.66 },
+    { "keys": ["D"], "duration": 1, "velocity": 0.62 },
+    { "keys": ["D"], "duration": 1, "velocity": 0.62 },
+    { "keys": ["C"], "duration": 2, "velocity": 0.60 }
+  ]
+}

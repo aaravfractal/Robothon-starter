@@ -1,0 +1,20 @@
+{
+  "title": "C Major Scale (up and down)",
+  "tempo_bpm": 110,
+  "notes": [
+    { "_section": "ascending C->B across all 7 keys, then back down",
+      "keys": ["C"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["D"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["E"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["F"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["G"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["A"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["B"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["A"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["G"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["F"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["E"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["D"], "duration": 1, "velocity": 0.70 },
+    { "keys": ["C"], "duration": 2, "velocity": 0.70 }
+  ]
+}
